@@ -8,7 +8,7 @@ const AddButton = ({handleAdd}) => {
     const [titleValue, onChangeTextTitle] = useState('');
     const [descriptionValue, onChangeTextDescription] = useState('');
     const [subjectValue, onChangeTextSubject] = useState('');
-    const [groupValue, onChangeTextGroup] = useState('');
+    const [schoolGroupValue, onChangeTextschoolGroup] = useState('');
     const [teacherValue, onChangeTextTeacher] = useState('');
     const [dueDateValue, onChangeDueDate] = useState();
 
@@ -46,7 +46,7 @@ const AddButton = ({handleAdd}) => {
                         <TextInput style={{borderBottomWidth: 1, borderBottomColor: '#0059C9', width: 200, marginVertical: 16}} placeholder="Lorem ipsum dolor" value={subjectValue} onChangeText={text => onChangeTextSubject(text)}/>
 
                         <Text>What is the group of your homework?</Text>
-                        <TextInput style={{borderBottomWidth: 1, borderBottomColor: '#0059C9', width: 200, marginVertical: 16}} placeholder="Lorem ipsum dolor" value={groupValue} onChangeText={text => onChangeTextGroup(text)}/>
+                        <TextInput style={{borderBottomWidth: 1, borderBottomColor: '#0059C9', width: 200, marginVertical: 16}} placeholder="Lorem ipsum dolor" value={schoolGroupValue} onChangeText={text => onChangeTextschoolGroup(text)}/>
 
                         <Text>What is the teacher of your homework?</Text>
                         <TextInput style={{borderBottomWidth: 1, borderBottomColor: '#0059C9', width: 200, marginVertical: 16}} placeholder="Lorem ipsum dolor" value={teacherValue} onChangeText={text => onChangeTextTeacher(text)}/>
@@ -57,7 +57,7 @@ const AddButton = ({handleAdd}) => {
                         <Button title="Create" onPress={ () => {
                             if (isDateValid(formattedDate(dueDateValue)))
                             {
-                                handleAdd({_id: Crypto.randomUUID(), title: titleValue, description: descriptionValue, subject: subjectValue, group: groupValue, teacher: teacherValue, dueDate: new Date(formattedDate(dueDateValue)), completed: false});
+                                handleAdd({id: Crypto.randomUUID(), title: titleValue, description: descriptionValue, subject: subjectValue, schoolGroup: schoolGroupValue, teacher: teacherValue, dueDate: new Date(formattedDate(dueDateValue)), completed: false});
                                 setModalVisible(!modalVisible);
                             }
                             else

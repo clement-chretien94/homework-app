@@ -11,7 +11,7 @@ const Homework = ({...props}) => {
           <Text>Titre : {props.title}</Text>
           <Text>Description : {props.description}</Text>
           <Text>Matière : {props.subject}</Text>
-          <Text>Groupe : {props.group}</Text>
+          <Text>Groupe : {props.schoolGroup}</Text>
           <Text>Professeur : {props.teacher}</Text>
           <Text>Heure : {props.dueDate.getHours()}:{props.dueDate.getMinutes()}</Text>
       </TouchableOpacity>

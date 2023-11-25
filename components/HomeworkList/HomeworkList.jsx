@@ -28,7 +28,7 @@ const HomeworkList = ({data, handleDelete, handleComplete}) => {
         workList.push (
             <>
                 <Text style={styles.date}>{uniqueDates[i].toLocaleDateString("fr")}</Text>
-                {sliceByDate(uniqueDates[i]).map(homework => <Homework title={homework.title} description={homework.description} subject={homework.subject} group={homework.group} teacher={homework.teacher} dueDate={homework.dueDate} completed={homework.completed} id={homework._id} handleDelete={handleDelete} handleComplete={handleComplete}/>)}
+                {sliceByDate(uniqueDates[i]).map(homework => <Homework title={homework.title} description={homework.description} subject={homework.subject} schoolGroup={homework.schoolGroup} teacher={homework.teacher} dueDate={homework.dueDate} completed={homework.completed} id={homework.id} handleDelete={handleDelete} handleComplete={handleComplete} key={homework.id}/>)}
             </>
         );
     }
