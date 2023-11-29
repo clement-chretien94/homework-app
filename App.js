@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, Platform, StatusBar, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, StatusBar, TouchableOpacity, Text } from 'react-native';
 import * as SQLite from 'expo-sqlite';
-import { HomeworkData } from './data/HomeworkData';
 import HomeworkList from './components/HomeworkList/HomeworkList';
 import AddButton from './components/AddButton/AddButton';
 
@@ -17,16 +16,6 @@ export default function App() {
     db.transaction(tx => {
       tx.executeSql('CREATE TABLE IF NOT EXISTS homeworks (id TEXT NOT NULL, title TEXT NOT NULL, description TEXT, subject TEXT NOT NULL, schoolGroup TEXT NOT NULL, teacher TEXT NOT NULL, dueDate INTEGER NOT NULL, completed INTEGER NOT NULL, CONSTRAINT pk_homeworks PRIMARY KEY(id), CONSTRAINT c_homeworks_completed CHECK(completed IN (0,1)));');
     });
-
-    // This code delete the table | Only for development
-    // db.transaction(tx => {
-    //   tx.executeSql(
-    //     'DROP TABLE IF EXISTS homeworks;',
-    //     [],
-    //     (txtObj, resultSet) => console.log("Table dropped"),
-    //     (txtObj, error) => console.log(error)
-    //   );
-    // });
 
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM homeworks;', null,
@@ -73,7 +62,7 @@ export default function App() {
       );
     });
   }
-  
+
   const handleComplete = (id) => {
     db.transaction(tx => {
       tx.executeSql(
@@ -92,6 +81,18 @@ export default function App() {
     });
   }
 
+    // This code delete the table | Only for development
+    const deleteTable = () => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'DROP TABLE IF EXISTS homeworks;',
+          [],
+          (txtObj, resultSet) => console.log("Table dropped"),
+          (txtObj, error) => console.log(error)
+        );
+      });
+    }
+
   console.log(data.length);
 
   if (isLoading) {
@@ -107,6 +108,12 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         <HomeworkList data={data} handleDelete={handleDelete} handleComplete={handleComplete}/>
         <AddButton handleAdd={handleAdd}/>
+        {
+        // This code delete the table | Only for development
+        }
+        <TouchableOpacity style={styles.button} onPress={() => deleteTable()}>
+          <Text>Delete table</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </>
 
